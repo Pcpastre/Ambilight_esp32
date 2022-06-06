@@ -37,18 +37,6 @@
 
         }
 
-        .hello2 {
-            margin-top: var(--hello2MT);
-            margin-left: 0%;
-            background: #5A5E5F;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-
         .boxLogin {
             border: solid null 2pt;
             background: null;
@@ -84,15 +72,16 @@
             height: fit-content;
             width: fit-content;
             margin-bottom: 5%;
-            border: solid #1B7FD6 4pt;
-            background: #00A1D6;
-            border-radius: 100px;
+            border: solid green 4pt;
+            background: rgba(0, 128, 0, 0.479);
+            border-radius: 30px;
             text-align: center;
             font-family: var(--SysLog);
             font-weight: bold;
             font-size: 100%;
             width: 20%;
-            color: #fff
+            color: #fff;
+            padding: 3px 1px;
         }
 
         f1 {
@@ -119,10 +108,10 @@
         }
 
         .boxText {
-            background-color: #403F40;
+            background-color: #403f4085;
             color: #FFFFFF;
-            border: solid #009C88 2pt;
-            border-radius: 100px;
+            border: solid green 1pt;
+            border-radius: 10px;
             font-family: var(--SysLog);
             font-size: 97%;
             text-align: center;
@@ -139,7 +128,7 @@
             appearance: none;
             background-color: transparent;
             border: 2px solid #e74c3c;
-            border-radius: 100px;
+            border-radius: 20px;
             color: #e74c3c;
             cursor: pointer;
             display: -webkit-box;
@@ -153,7 +142,7 @@
             font-weight: 400;
             line-height: 1;
             margin: 3%;
-            padding: 3% 10%;
+            padding: 5px 3px;
             text-decoration: none;
             text-align: center;
             text-transform: uppercase;
@@ -168,15 +157,15 @@
         }
 
         .third {
-            border-color: #3498db;
+            border-color: green;
             color: #fff;
-            box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+            box-shadow: 0 0 40px 40px rgba(0, 128, 0, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);
             -webkit-transition: all 10ms ease-in-out;
             transition: all 150ms ease-in-out;
         }
 
         .third:hover {
-            box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+            box-shadow: 0 0 10px 0 green inset, 0 0 10px 4px green;
         }
 
         .titleDiv {
@@ -194,7 +183,7 @@
 <body>
     <div class="titleDiv">
         <div class="title">
-            <F1>LOGIN</F1>
+            <F1>LOGIN WEBCONTROLLER</F1>
         </div>
     </div>
     <div class="hello">
@@ -219,31 +208,6 @@
             <BR>
             <button onclick="SendLogin()" class='button third'>Logar</button>
 
-        </div>
-    </div>
-    <div class='hello2'>
-        <div class="boxConf">
-            <div class="boxAutoStart">
-                <form action="/turnOnOff" method="GET">
-                    <table>
-                        <tr class="us-form">
-                            <td>
-                                <F1>Ação:</F1>
-                            </td>
-                            <td>
-                                <select name="action">
-                                    <option value="on">LIGAR</option>
-                                    <option value="off">DESLIGAR</option>
-                                </select>
-                            </td>
-
-                        </tr>
-                    </table>
-            </div>
-            <input type="submit" class="button third" value="Enviar" />
-            </form>
-            <br>
-            <br>
         </div>
     </div>
 </body>
