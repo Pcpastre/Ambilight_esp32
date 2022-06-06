@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AutoStart</title>
+    <style>
+        :root {
+            --helloMT: 6%;
+            --hello2MT: 6%;
+            --buttonML: 1%;
+            --boxLoginMR: 2%;
+            --boxLoginF: 2%;
+            --SysLog: 'Calibri';
+        }
+
+        html {
+            position: relative;
+            font-family: Helvetica;
+            margin: 0px auto;
+            text-align: center;
+            zoom: 200%;
+            background-color: #5A5E5F;
+        }
+
+
+
+        .hello {
+            margin-top: var(--helloMT);
+            background: #5A5E5F;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .hello2 {
+            margin-top: var(--hello2MT);
+            margin-left: 0%;
+            background: #5A5E5F;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
+        .boxLogin {
+            border: solid null 2pt;
+            background: null;
+            border-radius: 10px;
+            height: fit-content;
+            width: fit-content;
+            text-align: center;
+            margin-right: var(--boxLoginMR);
+
+        }
+
+        .boxAutoStart {
+            border: solid #1B7FD6 2pt;
+            background: #00A1D6;
+            border-radius: 10px;
+            height: fit-content;
+            width: fit-content;
+            text-align: center;
+
+        }
+
+        .boxConf {
+            height: 30%;
+            width: 45%;
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            height: fit-content;
+            width: fit-content;
+            margin-bottom: 5%;
+            border: solid #1B7FD6 4pt;
+            background: #00A1D6;
+            border-radius: 100px;
+            text-align: center;
+            font-family: var(--SysLog);
+            font-weight: bold;
+            font-size: 100%;
+            width: 20%;
+            color: #fff
+        }
+
+        f1 {
+            font-family: var(--SysLog);
+            font-weight: bold;
+            font-size: 100%;
+            color: #fff;
+        }
+        L1 {
+            font-family: var(--SysLog);
+            font-weight: bold;
+            font-size: 100%;
+            color: #fff;
+        }
+
+        .us-form select {
+            position: relative;
+            background: #00A1D6;
+            font-family: var(--SysLog);
+            font-weight: bold;
+            color: #fff;
+            font-size: relative;
+
+        }
+
+        .boxText {
+            background-color: #403F40;
+            color: #FFFFFF;
+            border: solid #009C88 2pt;
+            border-radius: 100px;
+            font-family: var(--SysLog);
+            font-size: 97%;
+            text-align: center;
+            height: fit-content;
+            width: fit-content;
+
+        }
+
+
+        .button {
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            border: 2px solid #e74c3c;
+            border-radius: 100px;
+            color: #e74c3c;
+            cursor: pointer;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-self: center;
+            -ms-flex-item-align: center;
+            align-self: center;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1;
+            margin: 3%;
+            padding: 3% 10%;
+            text-decoration: none;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: var(--SysLog);
+            font-weight: 700;
+        }
+
+        .button:hover,
+        .button:focus {
+            color: #fff;
+            outline: 0;
+        }
+
+        .third {
+            border-color: #3498db;
+            color: #fff;
+            box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+            -webkit-transition: all 10ms ease-in-out;
+            transition: all 150ms ease-in-out;
+        }
+
+        .third:hover {
+            box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+        }
+
+        .titleDiv {
+            margin-top: 1%;
+            margin-left: 0%;
+            background: #5A5E5F;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="titleDiv">
+        <div class="title">
+            <F1>LOGIN</F1>
+        </div>
+    </div>
+    <div class="hello">
+        <div class="boxConf">
+            <div class="boxLogin">
+                <table>
+                    <tr>
+                        <td>
+                            <L1>LOGIN:</L1>
+                        </td>
+                        <td><input id="login" class="boxText" type="text" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <L1>SENHA:</L1>
+                        </td>
+                        <td><input id="senha" class="boxText" type="password" type="text" value="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <BR>
+            <button onclick="SendLogin()" class='button third'>Logar</button>
+
+        </div>
+    </div>
+    <div class='hello2'>
+        <div class="boxConf">
+            <div class="boxAutoStart">
+                <form action="/turnOnOff" method="GET">
+                    <table>
+                        <tr class="us-form">
+                            <td>
+                                <F1>Ação:</F1>
+                            </td>
+                            <td>
+                                <select name="action">
+                                    <option value="on">LIGAR</option>
+                                    <option value="off">DESLIGAR</option>
+                                </select>
+                            </td>
+
+                        </tr>
+                    </table>
+            </div>
+            <input type="submit" class="button third" value="Enviar" />
+            </form>
+            <br>
+            <br>
+        </div>
+    </div>
+</body>
+<script>
+    var r = document.querySelector(':root');
+    var nav = navigator.platform;
+
+    console.log(nav);
+    if (nav == 'iPad') {
+        r.style.setProperty('--helloMT', '12%');
+        r.style.setProperty('--hello2MT', '20%');
+        r.style.setProperty('--buttonML', '3%');
+        r.style.setProperty('--SysLog', 'Helvetica Neue');
+        
+    }
+    function SendLogin() {
+
+
+        var login = document.getElementById("login").value;
+
+        var senha = document.getElementById("senha").value;
+
+
+        var xhr = new XMLHttpRequest();
+        key_url = "http://" + window.location.hostname + ":4002/key?senha=" + senha + "&login=" + login;
+        xhr.open("GET", key_url, false);
+        xhr.send();
+        key = xhr.responseText;
+        if (key === "-1") {
+            alert("Login ou senha inválidos. *TENTE NOVAMENTE*");
+            location.reload();
+        } else {
+
+            URL_reaction = "http://" + window.location.hostname + ":4002/conexao?login=true&key=" + key;
+            window.location = URL_reaction;
+        }
+
+
+    }
+</script>
+
+</html>

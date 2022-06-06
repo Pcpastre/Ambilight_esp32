@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AutoStart</title>
+    <style>
+        :root {
+            --SysLog: 'Calibri';
+        }
+
+        html {
+            font-family: Helvetica;
+            display: inline-block;
+            margin: 0px auto;
+            text-align: center;
+            zoom: 100%;
+        }
+
+        body {
+            margin-top: 2%;
+        }
+
+
+        .hello {
+            margin-top: 1%;
+            margin-left: 3%;
+            background: #5A5E5F;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .boxActionPCs {
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border: solid #1B7FD6 2pt;
+            background: #00A1D6;
+            border-radius: 10px;
+            height: fit-content;
+            width: fit-content;
+            text-align: center;
+
+        }
+
+        .boxConf {
+            height: fit-content;
+            width: fit-content;
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .boxTable {
+            border: solid #1B7FD6 2pt;
+            background: #00A1D6;
+            border-radius: 10px;
+            height: fit-content;
+            width: fit-content;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        f1 {
+            font-family:  var(--SysLog);
+            font-weight: bold;
+            color: #fff;
+            font-size: relative;
+        }
+
+        h1 {
+            font-family:  var(--SysLog);
+            font-weight: bold;
+            color: #00A1D6;
+            font-size: relative;
+        }
+
+        .us-form select {
+            position: relative;
+            background: #00A1D6;
+            font-family:  var(--SysLog);
+            font-weight: bold;
+            color: #fff;
+            font-size: relative;
+
+        }
+
+        /*.button {
+            margin-top: 1%;
+            border: solid #1B7FD6 2pt;
+            border-radius: 25px;
+            background-color: #5A5E5F;
+             Green 
+            height: fit-content;
+            width: fit-content;
+            margin-left: 2%;
+            text-align: center;
+            display: inline-block;
+            font-family: 'Calibri';
+            font-weight: bold;
+            color: #fff;
+        }*/
+
+        .title {
+            border: solid #1B7FD6 4pt;
+            background: #00A1D6;
+            border-radius: 100px;
+            text-align: center;
+            font-family:  var(--SysLog);
+            font-weight: bold;
+            font-size: 49px;
+            height: fit-content;
+            width: fit-content;
+            color: #fff
+        }
+
+        .titleDiv {
+            margin-top: 1%;
+            margin-left: 10%;
+            background: #5A5E5F;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: center;
+        }
+
+
+
+
+        .button {
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            border: 2px solid #e74c3c;
+            border-radius: 100px;
+            color: #e74c3c;
+            cursor: pointer;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-self: center;
+            -ms-flex-item-align: center;
+            align-self: center;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1;
+            margin: 20px;
+            padding: 1% 10%;
+            text-decoration: none;
+            text-align: center;
+            text-transform: uppercase;
+            font-family:  var(--SysLog);
+            font-weight: 700;
+        }
+
+        .button:hover,
+        .button:focus {
+            color: #fff;
+            outline: 0;
+        }
+
+        .third {
+            border-color: #3498db;
+            color: #fff;
+            box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+            -webkit-transition: all 150ms ease-in-out;
+            transition: all 150ms ease-in-out;
+        }
+
+        .third:hover {
+            box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+        }
+    </style>
+</head>
+
+<body style="background-color:#5A5E5F;">
+    <div class="titleDiv">
+        <div class="title">
+            <F1>Controle dos dispositivos</F1>
+        </div>
+    </div>
+
+    <div class="hello">
+
+        <div class='boxConf'>
+            <div class='boxActionPCs'>
+                <table border=0>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Ação:</F1>
+                        </td>
+                        <td><select id="action">
+                                <option value="on">LIGAR</option>
+                                <option value="off">DESLIGAR</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Dispositivo:</F1>
+                        </td>
+                        <td><select id="disp">
+                                <option value="note">NOTEBOOK</option>
+                                <option value="TA">TREI_A</option>
+                                <option value="TB">TREI_B</option>
+                                <option value="TC">TREI_C</option>
+                                <option value="PODIUM">PODIUM</option>
+                            </select>
+                    </tr>
+                </table>
+            </div>
+            <button onclick="SendAction()" class='button third'>Enviar Ação</button>
+        </div>
+
+        <div class='boxConf'>
+            <div class='boxActionPCs'>
+                <table border=0>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Ação:</F1>
+                        </td>
+                        <td><select id="actionTvs">
+                                <option value="on">LIGAR</option>
+                                <option value="off">DESLIGAR</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Televisão:</F1>
+                        </td>
+                        <td><select id="dispTvs">
+                                <option value="P_A">PEITO_ROBO_A</option>
+                                <option value="P_B">PEITO_ROBO_B</option>
+                                <option value="P_C">PEITO_ROBO_C</option>
+                                <option value="TV_T_A">TV_TREI_A</option>
+                                <option value="TV_T_B">TV_TREI_B</option>
+                                <option value="TV_T_C">TV_TREI_C</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <button onclick="SendTvs()" class='button third'>Enviar Ação</button>
+        </div>
+
+        <div class='boxConf'>
+            <div class='boxActionPCs'>
+                <table border=0>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Ação:</F1>
+                        </td>
+                        <td><select id="actionRpi">
+                                <option value="on">LIGAR</option>
+                                <option value="off">DESLIGAR</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="us-form">
+                        <td>
+                            <F1>raspBerry:</F1>
+                        </td>
+                        <td><select id="dispRpi">
+                                <option value="R_A">ROBO_A</option>
+                                <option value="R_B">ROBO_B</option>
+                                <option value="R_C">ROBO_C</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <button onclick="SendRpi()" class='button third'>Enviar Ação</button>
+        </div>
+
+        <div class='boxConf'>
+            <div class='boxActionPCs'>
+                <table border=0>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Ação:</F1>
+                        </td>
+                        <td><select id="actionSom">
+                                <option value="on">LIGAR</option>
+                                <option value="off">DESLIGAR</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="us-form">
+                        <td>
+                            <F1>Som:</F1>
+                        </td>
+                        <td><select id="dispSom">
+                                <option value="R_A">ROBO_A</option>
+                                <option value="R_B">ROBO_B</option>
+                                <option value="R_C">ROBO_C</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <button onclick="SendSom()" class='button third'>Enviar Ação</button>
+        </div>
+    </div>
+    <div class="titleDiv">
+
+        <button onclick="SendAnima()" class='button third'>Animação</button>
+
+        <div class="boxTable">
+            <F1>
+                <table border=1>
+                    <tr>
+                        <td>
+                            <F1>NOTEBOOK</F1>
+                        </td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>
+                            <F1>ROBO A</F1>
+                        </td>
+                        <td>
+                            <F1>ROBO B</F1>
+                        </td>
+                        <td>
+                            <F1>ROBO C</F1>
+                        </td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>PODIUM</td>
+                        <td>Trei A</td>
+                        <td>Trei B</td>
+                        <td>Trei C</td>
+                    </tr>
+                    <tr>
+                        <td>EntryPoints</td>
+                        <td><span id="v1">----</span></td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>RobotControl</td>
+                        <td><span id="v7">----</span></td>
+                        <td><span id="v10">----</span></td>
+                        <td><span id="v13">----</span></td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>Kiosk_App</td>
+                        <td><span id="v16">----</span></td>
+                        <td><span id="v19">----</span></td>
+                        <td><span id="v20">----</span></td>
+                        <td><span id="v21">----</span></td>
+                    </tr>
+                    <tr>
+                        <td>VoiceServer</td>
+                        <td><span id="v2">----</span></td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>handleFlOOR</td>
+                        <td><span id="v8">----</span></td>
+                        <td><span id="v11">----</span></td>
+                        <td><span id="v14">----</span></td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>MicrophonePython</td>
+                        <td><span id="v17">----</span></td>
+                    </tr>
+                    <tr>
+                        <td>Processing</td>
+                        <td><span id="v3">----</span></td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>handleHEAD</td>
+                        <td><span id="v9">----</span></td>
+                        <td><span id="v12">----</span></td>
+                        <td><span id="v15">----</span></td>
+                        <td>
+                            <h1>-</h1>
+                        </td>
+                        <td>ScreenMirroring</td>
+                        <td><span id="v18">----</span></td>
+                    </tr>
+                    <tr>
+                        <td>LightServer</td>
+                        <td><span id="v4">----</span></td>
+
+                    </tr>
+                    <tr>
+                        <td>LearningServer</td>
+                        <td><span id="v5">----</span></td>
+                    </tr>
+                    <tr>
+                        <td>ravel-hub-multi</td>
+                        <td><span id="v6">----</span></td>
+                    </tr>
+
+                </table>
+            </F1>
+        </div>
+    </div>
+</body>
+<script>
+
+    var r = document.querySelector(':root');
+    var nav = navigator.platform;
+
+    console.log(nav);
+    if (nav == 'iPad') {
+        r.style.setProperty('--SysLog', 'Helvetica Neue');
+
+    }
+
+
+
+    var myArray = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15", "v16", "v17", "v18", "v19", "v20", "v21"];
+    var val = 0;
+    setInterval(function () {
+        // Call a function repetatively with 2 Second interval
+        getData(val);
+        val = val + 1;
+        if (val > 20) {
+            val = 0;
+        }
+    }, 500); //2000mSeconds update rate
+
+    function getData(value) {
+        var xhttp1 = new XMLHttpRequest();
+
+        xhttp1.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var disp = "v" + (value + 1).toString();
+                document.getElementById(disp).innerHTML =
+                    this.responseText;
+            }
+        };
+        var newVal = value.toString();
+        var newData = "refresh?v=" + newVal;
+        xhttp1.open("GET", newData, true);
+        xhttp1.send();
+    }
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function SendAction() {
+        e = document.getElementById("action");
+        var action = e.options[e.selectedIndex].value;
+
+        e = document.getElementById("disp");
+        var disp = e.options[e.selectedIndex].value;
+
+
+        pars = "?action=" + action;
+        pars = pars + "&disp=" + disp;
+
+        URL_reaction = "http://" + window.location.hostname + ":4002/pcs" + pars;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", URL_reaction, true);
+        xhr.send();
+        location.reload();
+
+    }
+
+
+    function SendTvs() {
+        e = document.getElementById("actionTvs");
+        var action = e.options[e.selectedIndex].value;
+
+        e = document.getElementById("dispTvs");
+        var disp = e.options[e.selectedIndex].value;
+
+
+        pars = "?action=" + action;
+        pars = pars + "&disp=" + disp;
+
+        URL_reaction = "http://" + window.location.hostname + ":/tvs" + pars;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", URL_reaction, true);
+        xhr.send();
+        location.reload();
+
+    }
+
+    function SendRpi() {
+        e = document.getElementById("actionRpi");
+        var action = e.options[e.selectedIndex].value;
+
+        e = document.getElementById("dispRpi");
+        var disp = e.options[e.selectedIndex].value;
+
+
+        pars = "?action=" + action;
+        pars = pars + "&disp=" + disp;
+
+        URL_reaction = "http://" + window.location.hostname + ":/RPI" + pars;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", URL_reaction, true);
+        xhr.send();
+        location.reload();
+
+    }
+    function SendSom() {
+        e = document.getElementById("actionSom");
+        var action = e.options[e.selectedIndex].value;
+
+        e = document.getElementById("dispSom");
+        var disp = e.options[e.selectedIndex].value;
+
+
+        pars = "?action=" + action;
+        pars = pars + "&disp=" + disp;
+
+        URL_reaction = "http://" + window.location.hostname + ":/SOM" + pars;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", URL_reaction, true);
+        xhr.send();
+        location.reload();
+
+    }
+
+    function SendAnima() {
+
+
+        var key = getUrlVars()["key"];
+
+        URL_reaction = "http://" + window.location.hostname + ":4002/anima?key=" + key;
+
+        window.location = URL_reaction;
+
+
+    }
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+</script>
+
+
+</html>
