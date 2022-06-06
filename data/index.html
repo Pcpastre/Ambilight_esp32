@@ -232,7 +232,7 @@
 
 
         var xhr = new XMLHttpRequest();
-        key_url = "http://" + window.location.hostname + ":4002/key?senha=" + senha + "&login=" + login;
+        key_url = "http://" + window.location.hostname + ":/key?senha=" + senha + "&login=" + login;
         xhr.open("GET", key_url, false);
         xhr.send();
         key = xhr.responseText;
@@ -241,7 +241,7 @@
             location.reload();
         } else {
 
-            URL_reaction = "http://" + window.location.hostname + ":4002/conexao?login=true&key=" + key;
+            URL_reaction = "http://" + window.location.hostname + ":/conexao?login=true&key=" + key;
             window.location = URL_reaction;
         }
 

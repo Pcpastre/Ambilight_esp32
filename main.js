@@ -6,7 +6,6 @@ const port = process.env.PORT || 80;
 
 const request = require('request');
 
-// sendFile will go here
 app.get('/', function (req, res) {
 
 	res.sendFile(path.join(__dirname, 'data/index.html'));
@@ -47,6 +46,13 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+app.get('/conexao', function (req, res) {
+	var para1 = req.query.login;
+	var para2 = req.query.key;
+	if(para2 == key){
+		res.sendFile(path.join(__dirname, 'data/controllerPage.html'));
+	}
+});
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
