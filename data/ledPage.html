@@ -6,6 +6,9 @@
   <style type="text/css">
     :root {
       --SysLog: 'Calibri';
+      --ColorUm: green;
+      --ColorDois: green;
+      --ColorTres: green;
     }
 
 
@@ -49,19 +52,22 @@
     }
 
     .boxConfExt {
-      border: solid #1B7FD6 2pt;
-      background: #00A1D6;
+      margin: auto;
       border-radius: 10px;
       height: fit-content;
       width: fit-content;
+      align-items: left;
       text-align: center;
 
     }
 
     .boxConf {
+      margin: auto;
       height: fit-content;
       width: fit-content;
       text-align: center;
+      border: solid #1B7FD6 2pt;
+      background: #00A1D6;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -172,6 +178,7 @@
 
 
     .boxTable {
+      margin: auto;
       border: solid #1B7FD6 2pt;
       background: #00A1D6;
       border-radius: 10px;
@@ -219,236 +226,61 @@
 
     </div>
     <BR>
-    <div class="boxConfExt">
-      <table border=0>
-        <tr class="us-form">
-          <td>
-            <f1>BOT:</f1>
-          </td>
-          <td><select id="botIP">
-              <!-- <option value="192.168.15.9">BotC - Verde</option> -->
-              <option value="169.254.1.51">BotA - ROXO</option>
-              <option value="169.254.1.41">BotB - AMARELO</option>
-              <option value="169.254.1.31">BotC - VERDE</option>
-            </select></td>
-        </tr>
-      </table>
-    </div>
-
-    <BR>
-    <BR>
 
     <div class="boxConf">
-      <div class='boxConfExt'>
-        <table border=0>
-          <tr class="us-form">
-            <td>
-              <f1>Expressão:</f1>
-            </td>
-            <td><select id="exp">
-                <option value="1E">Normal</option>
-                <option value="2E">Pensativo</option>
-                <option value="3E">Surpreso</option>
-                <option value="4E">Triste</option>
-                <option value="5E">Feliz</option>
-              </select></td>
+      <f1>
+        <table border=2 style="padding-right: 5px;">
+          <tr>
+            Efeitos:
           </tr>
-        </table>
-        <table border=0>
-          <tr class="us-form">
-            <td>
-              <f1>Movimento dos olhos:</f1>
+          <tr>
+            <td>Fade</td>
+            <td> <button onclick="SendEffect(1)" class='button third'>Selecionar</button>
             </td>
-            <td><select id="move">
-                <option value="1MO">Para frente</option>
-                <option value="2MO">Para direita</option>
-                <option value="3MO">Para esquerda</option>
-                <option value="4MO">Piscar</option>
-              </select> </td>
           </tr>
+          <tr>
+            <td>Sound</td>
+            <td> <button onclick="SendEffect(2)" class='button third'>Selecionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Static</td>
+            <td> <button onclick="SendEffect(3)" class='button third'>Selecionar</button>
+            </td>
+          </tr>
+
         </table>
+      </f1>
+
+      <div class="boxConfExt" style="padding-left: 5px;">
+        <F1>
+          <table border=2>
+            <tr>
+              Modelos de predefinição
+            </tr>
+            <tr>
+              <td><span id="mod1">ModeUm</span></td>
+              <td> <button onclick="Send(1)" class="button second"
+                  style="box-shadow: 0 0 20px 20px var(--ColorUm) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Aplicar</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span id="mod2">ModeDois</span></td>
+              <td><button onclick="Send(2)" class="button second"
+                  style="box-shadow: 0 0 20px 20px var(--ColorDois) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Aplicar</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span id="mod3">ModeTres</span></td>
+              <td><button onclick="Send(3)" class="button second"
+                  style="box-shadow: 0 0 20px 20px var(--ColorTres) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Aplicar</button>
+              </td>
+            </tr>
+
+          </table>
+        </F1>
       </div>
-      <button onclick="Send()" class='button third'>Animar olhos</button>
     </div>
-
-
-    <BR>
-    <BR>
-
-    <div class="boxConf">
-      <div class="boxConfExt">
-        <table border=0>
-          <tr class="us-form">
-            <td>
-              <F1>Movimento da cabeça:</F1>
-            </td>
-            <td><select id="head">
-                <option value="3M_9999">Para esquerda</option>
-                <option value="1M_9999">Para o centro</option>
-                <option value="2M_9999">Para a direita</option>
-              </select></td>
-          </tr>
-        </table>
-      </div>
-      <button onclick="SendHead()" class='button third'>Animar cabeça</button>
-    </div>
-
-
-
-
-    <BR>
-    <BR>
-
-    <div class="boxConf">
-      <div class='boxConfExt'>
-        <table border=0>
-          <tr class="us-form">
-            <td>
-              <F1>Tipo de boca:</F1>
-            </td>
-            <td><select id="mounth">
-                <option value="1">Boca 1</option>
-                <option value="2">Boca 2</option>
-                <option value="3">Boca 3</option>
-              </select></td>
-          </tr>
-          <tr class="us-form">
-            <td>
-              <F1>Frame da boca:</F1>
-            </td>
-            <td><select id="level">
-                <option value="0">Frame 1</option>
-                <option value="1">Frame 2</option>
-                <option value="2">Frame 3</option>
-                <option value="3">Frame 4</option>
-                <option value="4">Frame 5</option>
-              </select></td>
-          </tr>
-        </table>
-      </div>
-      <button onclick="SendMounth()" class='button third'>Animar boca</button>
-    </div>
-
-    <BR>
-    <BR>
-
-    <div class="boxConf">
-      <div class='boxConfExt'>
-        <table border=0>
-          <tr class="us-form">
-            <td>
-              <F1>LEDs da cabeça:</F1>
-            </td>
-            <td><select id="head_leds">
-                <option value="sparkle">Piscando (Sparkle)</option>
-                <option value="pulse_part">Pulsando partes</option>
-                <option value="pulsando">Pulsando</option>
-                <option value="correndo">Correndo</option>
-                <option value="correndo_sparkle">Correndo Pulsando</option>
-                <option value="clearAndExit">Desligar</option>
-              </select></td>
-          </tr>
-        </table>
-      </div>
-      <button onclick="SendHeadLEDs()" class='button third'>Animar Led Cabeça</button>
-    </div>
-
-    <BR>
-    <BR>
-
-    <div class="boxConf">
-      <div class='boxConfExt'>
-        <table border=0>
-          <tr class="us-form">
-            <td>
-              <F1>Leds do chão:</F1>
-            </td>
-            <td><select id="floor_leds">
-                <option value="INIT">Cor fixa</option>
-                <option value="GO">Fluxo</option>
-                <option value="CLEAN">Desligar</option>
-              </select></td>
-          </tr>
-        </table>
-      </div>
-      <button onclick="SendFloorLEDs()" class='button third'>Animar LED chão</button>
-    </div>
-    <div class="boxTable">
-      <F1>
-        <table border=2>
-          <tr>
-            Modelos de predefinição
-          </tr>
-          <tr>
-            <td><span id="mod1">ModeUm</span></td>
-            <td> <button onclick="SendFloorLEDs()" class = "button second" style = "box-shadow: 0 0 20px 20px rgba(0, 15, 128, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Animar LED chão</button></td>
-            <td>
-              <h1>-</h1>
-            </td>
-            <td>RobotControl</td>
-            <td><span id="v7">----</span></td>
-            <td><span id="v10">----</span></td>
-            <td><span id="v13">----</span></td>
-            <td>
-              <h1>-</h1>
-            </td>
-            <td>Kiosk_App</td>
-            <td><span id="v16">----</span></td>
-            <td><span id="v19">----</span></td>
-            <td><span id="v20">----</span></td>
-            <td><span id="v21">----</span></td>
-          </tr>
-          <tr>
-            <td>VoiceServer</td>
-            <td><span id="v2">----</span></td>
-            <td>
-              <h1>-</h1>
-            </td>
-            <td>handleFlOOR</td>
-            <td><span id="v8">----</span></td>
-            <td><span id="v11">----</span></td>
-            <td><span id="v14">----</span></td>
-            <td>
-              <h1>-</h1>
-            </td>
-            <td>MicrophonePython</td>
-            <td><span id="v17">----</span></td>
-          </tr>
-          <tr>
-            <td>Processing</td>
-            <td><span id="v3">----</span></td>
-            <td>
-              <h1>-</h1>
-            </td>
-            <td>handleHEAD</td>
-            <td><span id="v9">----</span></td>
-            <td><span id="v12">----</span></td>
-            <td><span id="v15">----</span></td>
-            <td>
-              <h1>-</h1>
-            </td>
-            <td>ScreenMirroring</td>
-            <td><span id="v18">----</span></td>
-          </tr>
-          <tr>
-            <td>LightServer</td>
-            <td><span id="v4">----</span></td>
-
-          </tr>
-          <tr>
-            <td>LearningServer</td>
-            <td><span id="v5">----</span></td>
-          </tr>
-          <tr>
-            <td>ravel-hub-multi</td>
-            <td><span id="v6">----</span></td>
-          </tr>
-
-        </table>
-      </F1>
-    </div>
-
-  </div>
 </body>
 
 </html>
@@ -458,6 +290,17 @@
   var r = document.querySelector(':root');
   var nav = navigator.platform;
 
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+
+  var disp = getUrlVars()["dispOpt"];
+
+  document.getElementById("dispName").innerHTML = disp;
   console.log(nav);
   if (nav == 'iPad') {
     r.style.setProperty('--SysLog', 'Helvetica Neue');
@@ -465,144 +308,18 @@
   }
 
 
-  //
-  bot = "BotC"
-
 
   // THIS FUNCION CALLS THE ARDUINO CODE!
-  function Send() {
+  function Send(opt) {
 
-    e = document.getElementById("botIP");
-    var botIP = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("exp");
-    var exp = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("move");
-    var move = e.options[e.selectedIndex].value;
-
-    if (botIP == "169.254.1.51") {
-      bot = "BotA";
-    } else if (botIP == "169.254.1.41") {
-      bot = "BotB";
-    } else if (botIP == "169.254.1.31") {
-      bot = "BotC";
+    if (opt == 1) {
+      r.style.setProperty('--ColorUm', 'rgba(43, 70, 121, 0.5)');
+    } else if (opt == 2) {
+      r.style.setProperty('--ColorDois', 'rgba(43, 70, 121, 0.5)');
+    } else if (opt == 3) {
+      r.style.setProperty('--ColorTres', 'rgba(43, 70, 121, 0.5)');
     }
 
-    pars = "?bot=" + bot;
-    pars = pars + "&exp=" + exp;
-    pars = pars + "&move=" + move;
-
-    URL_reaction = "http://" + botIP + ":7777/moveEyesPI" + pars;
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", URL_reaction, true);
-    xhr.send();
-
-
-  }
-
-  function SendHead() {
-    e = document.getElementById("botIP");
-    var botIP = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("head");
-    var head = e.options[e.selectedIndex].value;
-
-    if (botIP == "169.254.1.51") {
-      bot = "BotA";
-    } else if (botIP == "169.254.1.41") {
-      bot = "BotB";
-    } else if (botIP == "169.254.1.31") {
-      bot = "BotC";
-    }
-
-    pars = "?bot=" + bot;
-    pars = pars + "&move=" + head;
-
-    URL_reaction = "http://" + botIP + ":7777/moveHeadPI" + pars;
-    realURL = "http://" + window.location.hostname + ":7777/runRobotUI?url=" + encodeURIComponent(URL_reaction);
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", URL_reaction, true);
-    xhr.send();
-
-
-  }
-
-  function SendMounth() {
-    e = document.getElementById("botIP");
-    var botIP = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("mounth");
-    var mounth = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("level");
-    var level = e.options[e.selectedIndex].value;
-
-    if (botIP == "169.254.1.51") {
-      bot = "BotA";
-    } else if (botIP == "169.254.1.41") {
-      bot = "BotB";
-    } else if (botIP == "169.254.1.31") {
-      bot = "BotC";
-    }
-
-    pars = "?bot=" + bot;
-    pars = pars + "&mounth=" + mounth;
-    pars = pars + "&level=" + level;
-
-    URL_reaction = "http://" + botIP + ":7777/moveMounthPI" + pars;
-    realURL = "http://" + window.location.hostname + ":7777/runRobotUI?url=" + encodeURIComponent(URL_reaction);
-
-    var xhr = new XMLHttpRequest();
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", URL_reaction, true);
-    xhr.send();;
-
-
-  }
-
-  function SendHeadLEDs() {
-
-    e = document.getElementById("botIP");
-    var botIP = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("head_leds");
-    var efeito = e.options[e.selectedIndex].value;
-
-    URL_reaction = "http://" + botIP + ":7778/" + efeito;
-    realURL = "http://" + window.location.hostname + ":7777/runRobotUI?url=" + encodeURIComponent(URL_reaction);
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", URL_reaction, true);
-    xhr.send();
-
-
-  }
-
-  function SendFloorLEDs() {
-
-    e = document.getElementById("botIP");
-    var botIP = e.options[e.selectedIndex].value;
-
-    e = document.getElementById("floor_leds");
-    var efeito = e.options[e.selectedIndex].value;
-
-    URL_reaction = "http://" + botIP + ":7779/" + efeito;
-    realURL = "http://" + window.location.hostname + ":7777/runRobotUI?url=" + encodeURIComponent(URL_reaction);
-
-    var xhr = new XMLHttpRequest();
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", URL_reaction, true);
-    xhr.send();
 
 
   }
