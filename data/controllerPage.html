@@ -161,10 +161,6 @@
             align-items: center;
         }
 
-
-
-
-        
         .button {
             box-sizing: border-box;
             -webkit-appearance: none;
@@ -230,7 +226,7 @@
                 <table border=0>
                     <tr class="us-form">
                         <td>
-                            <button onclick="SendAction(1)"class='button third'>Dispositivos</button>
+                            <button onclick="SendAction(1)" class='button third'>Dispositivos</button>
                         </td>
                         <td>
                             <button onclick="SendAction(2)" class='button third'>Sincronização</button>
@@ -239,12 +235,12 @@
                             <button onclick="SendAction(3)" class='button third'>Configuração</button>
                         </td>
                         <td>
-                            <button onclick="SendAction()" class='button third'>Perfil</button>
+                            <button onclick="SendAction(4)" class='button third'>Perfil</button>
                         </td>
                     </tr>
                 </table>
             </div>
-           
+        
         </div>
 
         <div class='boxConfBar'>
@@ -287,7 +283,7 @@
     var val = 0;
     setInterval(function () {
         // Call a function repetatively with 2 Second interval
-        getData(val);
+        //getData(val);
         val = val + 1;
         if (val > 20) {
             val = 0;
@@ -315,81 +311,6 @@
 
     function SendAction(disp) {
         console.log(disp);
-
-    }
-
-
-    function SendTvs() {
-        e = document.getElementById("actionTvs");
-        var action = e.options[e.selectedIndex].value;
-
-        e = document.getElementById("dispTvs");
-        var disp = e.options[e.selectedIndex].value;
-
-
-        pars = "?action=" + action;
-        pars = pars + "&disp=" + disp;
-
-        URL_reaction = "http://" + window.location.hostname + ":/tvs" + pars;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", URL_reaction, true);
-        xhr.send();
-        location.reload();
-
-    }
-
-    function SendRpi() {
-        e = document.getElementById("actionRpi");
-        var action = e.options[e.selectedIndex].value;
-
-        e = document.getElementById("dispRpi");
-        var disp = e.options[e.selectedIndex].value;
-
-
-        pars = "?action=" + action;
-        pars = pars + "&disp=" + disp;
-
-        URL_reaction = "http://" + window.location.hostname + ":/RPI" + pars;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", URL_reaction, true);
-        xhr.send();
-        location.reload();
-
-    }
-    function SendSom() {
-        e = document.getElementById("actionSom");
-        var action = e.options[e.selectedIndex].value;
-
-        e = document.getElementById("dispSom");
-        var disp = e.options[e.selectedIndex].value;
-
-
-        pars = "?action=" + action;
-        pars = pars + "&disp=" + disp;
-
-        URL_reaction = "http://" + window.location.hostname + ":/SOM" + pars;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", URL_reaction, true);
-        xhr.send();
-        location.reload();
-
-    }
-
-    function SendAnima() {
-
-
-        var key = getUrlVars()["key"];
-
-        URL_reaction = "http://" + window.location.hostname + ":4002/anima?key=" + key;
-
-        window.location = URL_reaction;
-
 
     }
 

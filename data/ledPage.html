@@ -8,32 +8,44 @@
       --SysLog: 'Calibri';
     }
 
+
     .hello {
       margin-top: 1%;
       margin-left: 3%;
-      background: #5A5E5F;
       display: flex;
       flex-direction: column;
       justify-content: left;
       align-items: left;
     }
 
-    .titleDiv {
-      margin-top: 1%;
-      margin-left: 0%;
-      background: #5A5E5F;
-      display: flex;
-      flex-direction: column;
-      justify-content: left;
-      align-items: center;
-    }
-
     html {
       font-family: Helvetica;
+      display: inline-block;
       margin: 0px auto;
       text-align: center;
       zoom: 175%;
-      background-color: #5A5E5F;
+    }
+
+    .boxBar {
+      margin: auto;
+      border: solid #1B7FD6 2pt;
+      background: #00A1D6;
+      border-radius: 10px;
+      height: fit-content;
+      width: 100%;
+      text-align: center;
+
+    }
+
+    .boxConfBar {
+      margin: auto;
+      height: fit-content;
+      width: fit-content;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
 
     .boxConfExt {
@@ -57,16 +69,28 @@
     }
 
     .title {
-      border: solid #1B7FD6 4pt;
-      background: #00A1D6;
-      border-radius: 100px;
+      height: fit-content;
+      width: fit-content;
+      margin-bottom: 5%;
+      border: solid green 4pt;
+      background: rgba(0, 128, 0, 0.479);
+      border-radius: 2px;
       text-align: center;
       font-family: var(--SysLog);
       font-weight: bold;
-      font-size: 49px;
-      height: fit-content;
-      width: fit-content;
-      color: #fff
+      font-size: 100%;
+      width: 20%;
+      color: #fff;
+      padding: 3px 1px;
+    }
+
+    .titleDiv {
+      margin-top: 1%;
+      margin-left: 0%;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: center;
     }
 
     f1 {
@@ -86,6 +110,7 @@
 
     }
 
+
     .button {
       box-sizing: border-box;
       -webkit-appearance: none;
@@ -93,7 +118,7 @@
       appearance: none;
       background-color: transparent;
       border: 2px solid #e74c3c;
-      border-radius: 100px;
+      border-radius: 20px;
       color: #e74c3c;
       cursor: pointer;
       display: -webkit-box;
@@ -106,8 +131,8 @@
       font-size: 1rem;
       font-weight: 400;
       line-height: 1;
-      margin: 20px;
-      padding: 1% 8%;
+      margin: 3%;
+      padding: 5px 3px;
       text-decoration: none;
       text-align: center;
       text-transform: uppercase;
@@ -122,30 +147,77 @@
     }
 
     .third {
-      border-color: #3498db;
+      border-color: green;
       color: #fff;
-      box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
-      -webkit-transition: all 150ms ease-in-out;
+      box-shadow: 0 0 40px 40px rgba(0, 128, 0, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);
+      -webkit-transition: all 10ms ease-in-out;
       transition: all 150ms ease-in-out;
     }
 
     .third:hover {
-      box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+      box-shadow: 0 0 10px 0 green inset, 0 0 10px 4px green;
+    }
+
+    .second {
+      border-color: green;
+      color: #fff;
+      box-shadow: 0 0 40px 40px rgba(0, 128, 0, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);
+      -webkit-transition: all 10ms ease-in-out;
+      transition: all 150ms ease-in-out;
+    }
+
+    .second:hover {
+      box-shadow: 0 0 10px 0 green inset, 0 0 10px 4px green;
+    }
+
+
+    .boxTable {
+      border: solid #1B7FD6 2pt;
+      background: #00A1D6;
+      border-radius: 10px;
+      height: fit-content;
+      width: fit-content;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 
 </header>
 
-<body style="background-color:#5A5E5F;">
+<body style="background-color: rgb(43, 70, 121);">
 
   <div class="titleDiv">
     <div class='title'>
-      Teste das Animações
+      <span id="dispName">DISPNAME?</span>
     </div>
   </div>
 
   <div class="hello">
 
+    <div class='boxConfBar'>
+      <div class='boxBar'>
+        <table border=0>
+          <tr class="us-form">
+            <td>
+              <button onclick="SendAction(1)" class='button third'>Dispositivos</button>
+            </td>
+            <td>
+              <button onclick="SendAction(2)" class='button third'>Sincronização</button>
+            </td>
+            <td>
+              <button onclick="SendAction(3)" class='button third'>Configuração</button>
+            </td>
+            <td>
+              <button onclick="SendAction(4)" class='button third'>Perfil</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
     <BR>
     <div class="boxConfExt">
       <table border=0>
@@ -300,6 +372,80 @@
         </table>
       </div>
       <button onclick="SendFloorLEDs()" class='button third'>Animar LED chão</button>
+    </div>
+    <div class="boxTable">
+      <F1>
+        <table border=2>
+          <tr>
+            Modelos de predefinição
+          </tr>
+          <tr>
+            <td><span id="mod1">ModeUm</span></td>
+            <td> <button onclick="SendFloorLEDs()" class = "button second" style = "box-shadow: 0 0 20px 20px rgba(0, 15, 128, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Animar LED chão</button></td>
+            <td>
+              <h1>-</h1>
+            </td>
+            <td>RobotControl</td>
+            <td><span id="v7">----</span></td>
+            <td><span id="v10">----</span></td>
+            <td><span id="v13">----</span></td>
+            <td>
+              <h1>-</h1>
+            </td>
+            <td>Kiosk_App</td>
+            <td><span id="v16">----</span></td>
+            <td><span id="v19">----</span></td>
+            <td><span id="v20">----</span></td>
+            <td><span id="v21">----</span></td>
+          </tr>
+          <tr>
+            <td>VoiceServer</td>
+            <td><span id="v2">----</span></td>
+            <td>
+              <h1>-</h1>
+            </td>
+            <td>handleFlOOR</td>
+            <td><span id="v8">----</span></td>
+            <td><span id="v11">----</span></td>
+            <td><span id="v14">----</span></td>
+            <td>
+              <h1>-</h1>
+            </td>
+            <td>MicrophonePython</td>
+            <td><span id="v17">----</span></td>
+          </tr>
+          <tr>
+            <td>Processing</td>
+            <td><span id="v3">----</span></td>
+            <td>
+              <h1>-</h1>
+            </td>
+            <td>handleHEAD</td>
+            <td><span id="v9">----</span></td>
+            <td><span id="v12">----</span></td>
+            <td><span id="v15">----</span></td>
+            <td>
+              <h1>-</h1>
+            </td>
+            <td>ScreenMirroring</td>
+            <td><span id="v18">----</span></td>
+          </tr>
+          <tr>
+            <td>LightServer</td>
+            <td><span id="v4">----</span></td>
+
+          </tr>
+          <tr>
+            <td>LearningServer</td>
+            <td><span id="v5">----</span></td>
+          </tr>
+          <tr>
+            <td>ravel-hub-multi</td>
+            <td><span id="v6">----</span></td>
+          </tr>
+
+        </table>
+      </F1>
     </div>
 
   </div>
