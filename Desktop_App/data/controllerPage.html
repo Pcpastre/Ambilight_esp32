@@ -30,7 +30,8 @@
             justify-content: left;
             align-items: left;
         }
-        .disp{
+
+        .disp {
             margin-top: 1%;
             margin-left: 0;
             height: 100vh;
@@ -51,6 +52,7 @@
             text-align: center;
 
         }
+
         .boxBar {
             margin: auto;
             border: solid #1B7FD6 2pt;
@@ -73,7 +75,7 @@
             align-items: center;
         }
 
-        .boxConf {  
+        .boxConf {
             height: fit-content;
             width: fit-content;
             text-align: center;
@@ -97,14 +99,14 @@
         }
 
         f1 {
-            font-family:  var(--SysLog);
+            font-family: var(--SysLog);
             font-weight: bold;
             color: #fff;
             font-size: relative;
         }
 
         h1 {
-            font-family:  var(--SysLog);
+            font-family: var(--SysLog);
             font-weight: bold;
             color: #00A1D6;
             font-size: relative;
@@ -113,7 +115,7 @@
         .us-form select {
             position: relative;
             background: #00A1D6;
-            font-family:  var(--SysLog);
+            font-family: var(--SysLog);
             font-weight: bold;
             color: #fff;
             font-size: relative;
@@ -136,7 +138,7 @@
             color: #fff;
         }*/
 
-        
+
         .title {
             height: fit-content;
             width: fit-content;
@@ -152,6 +154,7 @@
             color: #fff;
             padding: 3px 1px;
         }
+
         .titleDiv {
             margin-top: 1%;
             margin-left: 0%;
@@ -164,7 +167,7 @@
 
 
 
-        
+
         .button {
             box-sizing: border-box;
             -webkit-appearance: none;
@@ -211,12 +214,11 @@
         .third:hover {
             box-shadow: 0 0 10px 0 green inset, 0 0 10px 4px green;
         }
-
     </style>
 </head>
 
 <body style="background-color: rgb(43, 70, 121);">
- 
+
     <div class="titleDiv">
         <div class="title">
             <F1>Controle dos dispositivos</F1>
@@ -230,44 +232,101 @@
                 <table border=0>
                     <tr class="us-form">
                         <td>
-                            <button onclick="SendAction(1)"class='button third'>Dispositivos</button>
+                            <button onclick="SendAction(1)" class='button third'>MODO SOM</button>
                         </td>
                         <td>
-                            <button onclick="SendAction(2)" class='button third'>Sincronização</button>
+                            <button onclick="SendAction(2)" class='button third'>MODO NORMAL</button>
                         </td>
                         <td>
-                            <button onclick="SendAction(3)" class='button third'>Configuração</button>
+                            <button onclick="SendAction(3)" class='button third'>MODO TELA</button>
                         </td>
-                        <td>
-                            <button onclick="SendAction()" class='button third'>Perfil</button>
-                        </td>
+                        <!--<td>
+                            <button onclick="SendAction(4)" class='button third'>Perfil</button>
+                        </td>-->
                     </tr>
                 </table>
             </div>
-           
+
         </div>
 
         <div class='boxConfBar'>
             <div class='boxActionPCs'>
-                <table border=0>
-                    <tr class="us-form">
-                        <td>
-                            <F1>Utimos dispositivos Acessados:</F1>
-                        </td>
-                        <td><select id="dev">
-                                <option value="1"><span id="v1">----</span></option>
-                                <option value="2"><span id="v2">----</span></option>
-                                <option value="3"><span id="v3">----</span></option>
-                                <option value="4"><span id="v4">----</span></option>
-                            </select>
-                        </td>
-                        <td>
-                            <button onclick="selectDev()" class='button third'> Selecionar Dispositivo</button>
-                        </td>
-                    </tr>
-                </table>
+                <input type="color" onchange="printColor(event)" value="#ff0000">
             </div>
         </div>
+    </div>
+
+
+
+    <script>
+
+        var r = document.querySelector(':root');
+        var nav = navigator.platform;
+
+        console.log(nav);
+        if (nav == 'iPad') {
+            r.style.setProperty('--SysLog', 'Helvetica Neue');
+
+        }
+
+
+
+        var myArray = ["v1", "v2", "v3", "v4"];
+        var val = 0;
+        setInterval(function () {
+            // Call a function repetatively with 2 Second interval
+            window.onload = getData(val);
+            val = val + 1;
+            if (val > 3) {
+                val = 0;
+            }
+        }, 1000); //2000mSeconds update rate
+
+        function getData(value) {
+            var xhttp1 = new XMLHttpRequest();
+
+            xhttp1.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var disp1 = "v" + (value + 1).toString();
+                    console.log(disp1);
+                    document.getElementById(disp1).innerHTML = this.responseText;
+                }
+            };
+            var newVal = value.toString();
+            var newData = "getDisp?v=" + newVal;
+            xhttp1.open("GET", newData, true);
+            xhttp1.send();
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function SendAction(disp) {
+            console.log(disp);
+
+        }
+
+        function selectDev() {
+
+            e = document.getElementById("dev");
+            var disp = e.options[e.selectedIndex].innerHTML;
+            var key = getUrlVars()["key"];
+
+            URL_reaction = "http://" + window.location.hostname + ":/disp?key=" + key + "&dispOpt=" + disp ;
+
+            window.location = URL_reaction;
+
+        }
+
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+    </script>
 
 </body>
 <script>
@@ -285,113 +344,100 @@
 
     var myArray = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15", "v16", "v17", "v18", "v19", "v20", "v21"];
     var val = 0;
-    setInterval(function () {
-        // Call a function repetatively with 2 Second interval
-        getData(val);
-        val = val + 1;
-        if (val > 20) {
-            val = 0;
-        }
-    }, 500); //2000mSeconds update rate
 
-    function getData(value) {
-        var xhttp1 = new XMLHttpRequest();
-
-        xhttp1.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var disp = "v" + (value + 1).toString();
-                document.getElementById(disp).innerHTML =
-                    this.responseText;
-            }
-        };
-        var newVal = value.toString();
-        var newData = "refresh?v=" + newVal;
-        xhttp1.open("GET", newData, true);
-        xhttp1.send();
-    }
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    function SendAction(disp) {
+    async function printColor(ev){
+        const color = ev.target.value
+        const r = parseInt(color.substr(1, 2), 16)
+        const g = parseInt(color.substr(3, 2), 16)
+        const b = parseInt(color.substr(5, 2), 16)
+        console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+
+        URL_reaction = "http://localhost/color?r="+r+"&g="+g+"&b="+b;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+    }
+
+    async function SendAction(disp) {
         console.log(disp);
+        if (disp == "1") {
 
+            URL_reaction = "http://localhost/SonOff?service=wave&mode=on";
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+            URL_reaction2 = "http://localhost/mode?M=SOM";
+
+            var xhr2 = new XMLHttpRequest();
+
+            xhr2.open("GET", URL_reaction2, true);
+            xhr2.send();
+            await sleep(200);
+            URL_reaction = "http://localhost/SonOff?service=color&mode=off";
+
+            var xhr3 = new XMLHttpRequest();
+
+            xhr3.open("GET", URL_reaction, true);
+            xhr3.send();
+            await sleep(200);
+        } else if (disp == "2") {
+            URL_reaction = "http://localhost/SonOff?service=wave&mode=off";
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+            URL_reaction2 = "http://localhost/mode?M=normal";
+
+            var xhr2 = new XMLHttpRequest();
+
+            xhr2.open("GET", URL_reaction2, true);
+            xhr2.send();
+            await sleep(200);
+            URL_reaction = "http://localhost/SonOff?service=color&mode=off";
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+        }
+        else if (disp == "3") {
+            URL_reaction = "http://localhost/SonOff?service=color&mode=on";
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+            URL_reaction = "http://localhost/SonOff?service=wave&mode=off";
+
+            var xhr2 = new XMLHttpRequest();
+
+            xhr2.open("GET", URL_reaction, true);
+            xhr2.send();
+            await sleep(200);
+            URL_reaction2 = "http://localhost/mode?M=normal";
+
+            var xhr3 = new XMLHttpRequest();
+
+            xhr3.open("GET", URL_reaction2, true);
+            xhr3.send();
+            await sleep(200);
+        }
     }
 
-
-    function SendTvs() {
-        e = document.getElementById("actionTvs");
-        var action = e.options[e.selectedIndex].value;
-
-        e = document.getElementById("dispTvs");
-        var disp = e.options[e.selectedIndex].value;
-
-
-        pars = "?action=" + action;
-        pars = pars + "&disp=" + disp;
-
-        URL_reaction = "http://" + window.location.hostname + ":/tvs" + pars;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", URL_reaction, true);
-        xhr.send();
-        location.reload();
-
-    }
-
-    function SendRpi() {
-        e = document.getElementById("actionRpi");
-        var action = e.options[e.selectedIndex].value;
-
-        e = document.getElementById("dispRpi");
-        var disp = e.options[e.selectedIndex].value;
-
-
-        pars = "?action=" + action;
-        pars = pars + "&disp=" + disp;
-
-        URL_reaction = "http://" + window.location.hostname + ":/RPI" + pars;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", URL_reaction, true);
-        xhr.send();
-        location.reload();
-
-    }
-    function SendSom() {
-        e = document.getElementById("actionSom");
-        var action = e.options[e.selectedIndex].value;
-
-        e = document.getElementById("dispSom");
-        var disp = e.options[e.selectedIndex].value;
-
-
-        pars = "?action=" + action;
-        pars = pars + "&disp=" + disp;
-
-        URL_reaction = "http://" + window.location.hostname + ":/SOM" + pars;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", URL_reaction, true);
-        xhr.send();
-        location.reload();
-
-    }
-
-    function SendAnima() {
-
-
-        var key = getUrlVars()["key"];
-
-        URL_reaction = "http://" + window.location.hostname + ":4002/anima?key=" + key;
-
-        window.location = URL_reaction;
-
-
-    }
 
     function getUrlVars() {
         var vars = {};

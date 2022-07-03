@@ -6,6 +6,13 @@ const port = process.env.PORT || 80;
 
 const request = require('request');
 
+var serialHub = require('./serialHub');
+
+
+var dispositvo = new serialHub("COM4", "teste");
+
+console.log(dispositvo);
+
 app.get('/', function (req, res) {
 
 	res.sendFile(path.join(__dirname, 'data/index.html'));
@@ -52,6 +59,29 @@ app.get('/conexao', function (req, res) {
 	if(para2 == key){
 		res.sendFile(path.join(__dirname, 'data/controllerPage.html'));
 	}
+});
+
+app.get('/disp', function (req, res) {
+	var para1 = req.query.key;
+
+	console.log(para1);
+	if (para1 == key && clientIp == req.socket.remoteAddress) {
+
+		res.sendFile(path.join(__dirname, 'data/ledPage.html'));
+	} else {
+		res.status(401).sendFile(path.join(__dirname, 'data/errorPage.html'));
+	}
+});
+
+var serverState = ["led1","led2","led3","led4"];
+var category = ["led","led","led","led"];
+
+app.get('/getDisp', function (req, res) {
+	var v = req.query.v;
+	var vToint = parseInt(v);
+	console.log(vToint);
+	console.log(serverState[vToint]);
+	res.send(serverState[vToint]);
 });
 
 app.listen(port);

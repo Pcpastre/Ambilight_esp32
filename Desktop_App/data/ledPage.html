@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<header>
+  <meta charset="UTF-8" name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=yes" />
+  <style type="text/css">
+    :root {
+      --SysLog: 'Calibri';
+      --ColorUm: green;
+      --ColorDois: green;
+      --ColorTres: green;
+    }
+
+
+    .hello {
+      margin-top: 1%;
+      margin-left: 3%;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: left;
+    }
+
+    html {
+      font-family: Helvetica;
+      display: inline-block;
+      margin: 0px auto;
+      text-align: center;
+      zoom: 175%;
+    }
+
+    .boxBar {
+      margin: auto;
+      border: solid #1B7FD6 2pt;
+      background: #00A1D6;
+      border-radius: 10px;
+      height: fit-content;
+      width: 100%;
+      text-align: center;
+
+    }
+
+    .boxConfBar {
+      margin: auto;
+      height: fit-content;
+      width: fit-content;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .boxConfExt {
+      margin: auto;
+      border-radius: 10px;
+      height: fit-content;
+      width: fit-content;
+      align-items: left;
+      text-align: center;
+
+    }
+
+    .boxConf {
+      margin: auto;
+      height: fit-content;
+      width: fit-content;
+      text-align: center;
+      border: solid #1B7FD6 2pt;
+      background: #00A1D6;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title {
+      height: fit-content;
+      width: fit-content;
+      margin-bottom: 5%;
+      border: solid green 4pt;
+      background: rgba(0, 128, 0, 0.479);
+      border-radius: 2px;
+      text-align: center;
+      font-family: var(--SysLog);
+      font-weight: bold;
+      font-size: 100%;
+      width: 20%;
+      color: #fff;
+      padding: 3px 1px;
+    }
+
+    .titleDiv {
+      margin-top: 1%;
+      margin-left: 0%;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: center;
+    }
+
+    f1 {
+      font-family: var(--SysLog);
+      font-weight: bold;
+      color: #fff;
+      font-size: relative;
+    }
+
+    .us-form select {
+      position: relative;
+      background: #00A1D6;
+      font-family: var(--SysLog);
+      font-weight: bold;
+      color: #fff;
+      font-size: relative;
+
+    }
+
+
+    .button {
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: transparent;
+      border: 2px solid #e74c3c;
+      border-radius: 20px;
+      color: #e74c3c;
+      cursor: pointer;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1;
+      margin: 3%;
+      padding: 5px 3px;
+      text-decoration: none;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: var(--SysLog);
+      font-weight: 700;
+    }
+
+    .button:hover,
+    .button:focus {
+      color: #fff;
+      outline: 0;
+    }
+
+    .third {
+      border-color: green;
+      color: #fff;
+      box-shadow: 0 0 40px 40px rgba(0, 128, 0, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);
+      -webkit-transition: all 10ms ease-in-out;
+      transition: all 150ms ease-in-out;
+    }
+
+    .third:hover {
+      box-shadow: 0 0 10px 0 green inset, 0 0 10px 4px green;
+    }
+
+    .second {
+      border-color: green;
+      color: #fff;
+      box-shadow: 0 0 40px 40px rgba(0, 128, 0, 0.479) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);
+      -webkit-transition: all 10ms ease-in-out;
+      transition: all 150ms ease-in-out;
+    }
+
+    .second:hover {
+      box-shadow: 0 0 10px 0 green inset, 0 0 10px 4px green;
+    }
+
+
+    .boxTable {
+      margin: auto;
+      border: solid #1B7FD6 2pt;
+      background: #00A1D6;
+      border-radius: 10px;
+      height: fit-content;
+      width: fit-content;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+</header>
+
+<body style="background-color: rgb(43, 70, 121);">
+
+  <div class="titleDiv">
+    <div class='title'>
+      <span id="dispName">DISPNAME?</span>
+    </div>
+  </div>
+
+  <div class="hello">
+
+    <div class='boxConfBar'>
+      <div class='boxBar'>
+        <table border=0>
+          <tr class="us-form">
+            <td>
+              <button onclick="SendAction(1)" class='button third'>Dispositivos</button>
+            </td>
+            <td>
+              <button onclick="SendAction(2)" class='button third'>Sincronização</button>
+            </td>
+            <td>
+              <button onclick="SendAction(3)" class='button third'>Configuração</button>
+            </td>
+            <td>
+              <button onclick="SendAction(4)" class='button third'>Perfil</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+    <BR>
+
+    <div class="boxConf">
+      <f1>
+        <table border=2 style="padding-right: 5px;">
+          <tr>
+            Efeitos:
+          </tr>
+          <tr>
+            <td>Fade</td>
+            <td> <button onclick="SendEffect(1)" class='button third'>Selecionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Sound</td>
+            <td> <button onclick="SendEffect(2)" class='button third'>Selecionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Static</td>
+            <td> <button onclick="SendEffect(3)" class='button third'>Selecionar</button>
+            </td>
+          </tr>
+
+        </table>
+      </f1>
+
+      <div class="boxConfExt" style="padding-left: 5px;">
+        <F1>
+          <table border=2>
+            <tr>
+              Modelos de predefinição
+            </tr>
+            <tr>
+              <td><span id="mod1">ModeUm</span></td>
+              <td> <button onclick="Send(1)" class="button second"
+                  style="box-shadow: 0 0 20px 20px var(--ColorUm) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Aplicar</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span id="mod2">ModeDois</span></td>
+              <td><button onclick="Send(2)" class="button second"
+                  style="box-shadow: 0 0 20px 20px var(--ColorDois) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Aplicar</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span id="mod3">ModeTres</span></td>
+              <td><button onclick="Send(3)" class="button second"
+                  style="box-shadow: 0 0 20px 20px var(--ColorTres) inset, 0 0 0 0 rgba(0, 128, 0, 0.479);">Aplicar</button>
+              </td>
+            </tr>
+
+          </table>
+        </F1>
+      </div>
+    </div>
+</body>
+
+</html>
+
+<SCRIPT>
+
+  var r = document.querySelector(':root');
+  var nav = navigator.platform;
+
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+
+  var disp = getUrlVars()["dispOpt"];
+
+  document.getElementById("dispName").innerHTML = disp;
+  console.log(nav);
+  if (nav == 'iPad') {
+    r.style.setProperty('--SysLog', 'Helvetica Neue');
+
+  }
+
+
+
+  // THIS FUNCION CALLS THE ARDUINO CODE!
+  function Send(opt) {
+
+    if (opt == 1) {
+      r.style.setProperty('--ColorUm', 'rgba(43, 70, 121, 0.5)');
+    } else if (opt == 2) {
+      r.style.setProperty('--ColorDois', 'rgba(43, 70, 121, 0.5)');
+    } else if (opt == 3) {
+      r.style.setProperty('--ColorTres', 'rgba(43, 70, 121, 0.5)');
+    }
+
+
+
+  }
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
+</SCRIPT>
