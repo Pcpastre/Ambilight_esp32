@@ -269,35 +269,6 @@
 
         }
 
-
-
-        var myArray = ["v1", "v2", "v3", "v4"];
-        var val = 0;
-        setInterval(function () {
-            // Call a function repetatively with 2 Second interval
-            window.onload = getData(val);
-            val = val + 1;
-            if (val > 3) {
-                val = 0;
-            }
-        }, 1000); //2000mSeconds update rate
-
-        function getData(value) {
-            var xhttp1 = new XMLHttpRequest();
-
-            xhttp1.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    var disp1 = "v" + (value + 1).toString();
-                    console.log(disp1);
-                    document.getElementById(disp1).innerHTML = this.responseText;
-                }
-            };
-            var newVal = value.toString();
-            var newData = "getDisp?v=" + newVal;
-            xhttp1.open("GET", newData, true);
-            xhttp1.send();
-        }
-
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
@@ -331,14 +302,6 @@
 </body>
 <script>
 
-    var r = document.querySelector(':root');
-    var nav = navigator.platform;
-
-    console.log(nav);
-    if (nav == 'iPad') {
-        r.style.setProperty('--SysLog', 'Helvetica Neue');
-
-    }
 
 
 
@@ -356,7 +319,7 @@
         const b = parseInt(color.substr(5, 2), 16)
         console.log(`red: ${r}, green: ${g}, blue: ${b}`)
 
-        URL_reaction = "http://localhost/color?r="+r+"&g="+g+"&b="+b;
+        URL_reaction = "http://"+ location.hostname +"/color?r="+r+"&g="+g+"&b="+b;
 
             var xhr = new XMLHttpRequest();
 
@@ -369,21 +332,21 @@
         console.log(disp);
         if (disp == "1") {
 
-            URL_reaction = "http://localhost/SonOff?service=wave&mode=on";
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=wave&mode=on";
 
             var xhr = new XMLHttpRequest();
 
             xhr.open("GET", URL_reaction, true);
             xhr.send();
             await sleep(200);
-            URL_reaction2 = "http://localhost/mode?M=SOM";
+            URL_reaction2 = "http://"+location.hostname+"/mode?M=SOM";
 
             var xhr2 = new XMLHttpRequest();
 
             xhr2.open("GET", URL_reaction2, true);
             xhr2.send();
             await sleep(200);
-            URL_reaction = "http://localhost/SonOff?service=color&mode=off";
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=color&mode=off";
 
             var xhr3 = new XMLHttpRequest();
 
@@ -391,21 +354,21 @@
             xhr3.send();
             await sleep(200);
         } else if (disp == "2") {
-            URL_reaction = "http://localhost/SonOff?service=wave&mode=off";
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=wave&mode=off";
 
             var xhr = new XMLHttpRequest();
 
             xhr.open("GET", URL_reaction, true);
             xhr.send();
             await sleep(200);
-            URL_reaction2 = "http://localhost/mode?M=normal";
+            URL_reaction2 = "http://"+location.hostname+"/mode?M=normal";
 
             var xhr2 = new XMLHttpRequest();
 
             xhr2.open("GET", URL_reaction2, true);
             xhr2.send();
             await sleep(200);
-            URL_reaction = "http://localhost/SonOff?service=color&mode=off";
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=color&mode=off";
 
             var xhr = new XMLHttpRequest();
 
@@ -414,21 +377,21 @@
             await sleep(200);
         }
         else if (disp == "3") {
-            URL_reaction = "http://localhost/SonOff?service=color&mode=on";
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=color&mode=on";
 
             var xhr = new XMLHttpRequest();
 
             xhr.open("GET", URL_reaction, true);
             xhr.send();
             await sleep(200);
-            URL_reaction = "http://localhost/SonOff?service=wave&mode=off";
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=wave&mode=off";
 
             var xhr2 = new XMLHttpRequest();
 
             xhr2.open("GET", URL_reaction, true);
             xhr2.send();
             await sleep(200);
-            URL_reaction2 = "http://localhost/mode?M=normal";
+            URL_reaction2 = "http://"+location.hostname+"/mode?M=normal";
 
             var xhr3 = new XMLHttpRequest();
 

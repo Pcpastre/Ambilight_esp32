@@ -9,7 +9,7 @@ THREADS = []
 
 app = Flask(__name__) 
 
-maxValue = 2**16
+maxValue = (2**16)/100000
 bars = 35
 p=pyaudio.PyAudio()
 
@@ -33,16 +33,21 @@ class audioBars(Thread):
             print("Error in AudioBars!")
 
     def run(self):
+        count = 0
+        peakML = 30
+        peakMR = 30
         while (self.alive):
                     try:
                         ipD = '192.168.0.102'
                         data = np.fromstring(stream.read(1024),dtype=np.int16)
                         dataL = data[0::2]
                         dataR = data[1::2]
+                        
                         peakL = np.abs(np.max(dataL)-np.min(dataL))/maxValue
                         peakR = np.abs(np.max(dataR)-np.min(dataR))/maxValue
-                        print(peakL*100, peakR*100)
-                        if((peakL*100) > 7 and (peakR*100) > 7):
+
+                        #print(peakL, peakR)
+                        if((peakL) > peakML and (peakR) > peakMR and (count%10 == 0)):
                             rI =  random.randint(0, 255)
                             gI =  random.randint(0, 255)
                             bI =  random.randint(0, 255)
@@ -51,7 +56,10 @@ class audioBars(Thread):
                             b = str(bI)
                             req = requests.get('http://'+ ipD +'/colorSend?R=' +r+ '&G=' +g+ '&B=' + b)
                             req.status_code
-                        
+                            peakML = ((peakML + peakR)/2) - peakML*0.16
+                            peakMR = ((peakMR + peakR)/2) - peakMR*0.16
+                            print(peakML, peakMR)
+                        count = count + 1
                     except:
                         # Sometimes the APP stuck and this exception happens in a loop
                         print("Error in AudioBars")

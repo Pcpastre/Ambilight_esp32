@@ -11,8 +11,11 @@
     "serialport": "^10.4.0",
     "wol": "^1.0.7"
   },
+  
   "scripts": {
-    "test": "node main.js"
+    "test": "node main.js",
+    "color": "python C:\\Users\\Administrator\\Documents\\GitHub\\WebController\\Desktop_App\\pythonScripts\\colorGet.py",
+    "wave": "python C:\\Users\\Administrator\\Documents\\GitHub\\WebController\\Desktop_App\\pythonScripts\\waveGet.py"
   },
   "author": "Pcpastre",
   "license": "ISC"
