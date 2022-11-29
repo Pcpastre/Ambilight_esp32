@@ -17,7 +17,7 @@ for i in range(p.get_device_count()):
     print(i, p.get_device_info_by_index(i)["name"])
 
 stream=p.open(format=pyaudio.paInt16,channels=2,rate=44100,
-              input=True,input_device_index=0, frames_per_buffer=1024)
+              input=True,input_device_index=1, frames_per_buffer=1024)
 
 
 class audioBars(Thread):
@@ -34,20 +34,19 @@ class audioBars(Thread):
 
     def run(self):
         count = 0
-        peakML = 30
-        peakMR = 30
+        peakML = 1000
+        peakMR = 1000
         while (self.alive):
                     try:
-                        ipD = '192.168.0.102'
+                        ipD = '192.168.0.162'
                         data = np.fromstring(stream.read(1024),dtype=np.int16)
                         dataL = data[0::2]
                         dataR = data[1::2]
                         
-                        peakL = np.abs(np.max(dataL)-np.min(dataL))/maxValue
                         peakR = np.abs(np.max(dataR)-np.min(dataR))/maxValue
 
                         #print(peakL, peakR)
-                        if((peakL) > peakML and (peakR) > peakMR and (count%10 == 0)):
+                        if((peakR) > peakMR and (count%10 == 0)):
                             rI =  random.randint(0, 255)
                             gI =  random.randint(0, 255)
                             bI =  random.randint(0, 255)
@@ -56,9 +55,8 @@ class audioBars(Thread):
                             b = str(bI)
                             req = requests.get('http://'+ ipD +'/colorSend?R=' +r+ '&G=' +g+ '&B=' + b)
                             req.status_code
-                            peakML = ((peakML + peakR)/2) - peakML*0.16
                             peakMR = ((peakMR + peakR)/2) - peakMR*0.16
-                            print(peakML, peakMR)
+                            print(peakMR)
                         count = count + 1
                     except:
                         # Sometimes the APP stuck and this exception happens in a loop

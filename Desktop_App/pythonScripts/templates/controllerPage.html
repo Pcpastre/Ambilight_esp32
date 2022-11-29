@@ -240,6 +240,12 @@
                         <td>
                             <button onclick="SendAction(3)" class='button third'>MODO TELA</button>
                         </td>
+                        <td>
+                            <button onclick="SendAction(4)" class='button third'>MODO TELA 2</button>
+                        </td>
+                        <td>
+                            <button onclick="SendAction(5)" class='button third'>MODO TELA 3</button>
+                        </td>
                         <!--<td>
                             <button onclick="SendAction(4)" class='button third'>Perfil</button>
                         </td>-->
@@ -252,6 +258,11 @@
         <div class='boxConfBar'>
             <div class='boxActionPCs'>
                 <input type="color" onchange="printColor(event)" value="#ff0000">
+            </div>
+        </div>
+        <div class='boxConfBar'>
+            <div class='boxActionPCs'>
+                <input type="color" onchange="printColor2(event)" value="#ff0000">
             </div>
         </div>
     </div>
@@ -327,6 +338,37 @@
             xhr.send();
             await sleep(200);
     }
+    async function printColor(ev){
+        const color = ev.target.value
+        const r = parseInt(color.substr(1, 2), 16)
+        const g = parseInt(color.substr(3, 2), 16)
+        const b = parseInt(color.substr(5, 2), 16)
+        console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+
+        URL_reaction = "http://"+ location.hostname +"/colorEnd?r="+r+"&g="+g+"&b="+b;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+    }
+    async function printColor2(ev){
+        const color = ev.target.value
+        const r = parseInt(color.substr(1, 2), 16)
+        const g = parseInt(color.substr(3, 2), 16)
+        const b = parseInt(color.substr(5, 2), 16)
+        console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+
+        URL_reaction = "http://"+ location.hostname +"/colorEnd?r="+r+"&g="+g+"&b="+b;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+    }
+
 
     async function SendAction(disp) {
         console.log(disp);
@@ -385,6 +427,52 @@
             xhr.send();
             await sleep(200);
             URL_reaction = "http://"+location.hostname+"/SonOff?service=wave&mode=off";
+
+            var xhr2 = new XMLHttpRequest();
+
+            xhr2.open("GET", URL_reaction, true);
+            xhr2.send();
+            await sleep(200);
+            URL_reaction2 = "http://"+location.hostname+"/mode?M=normal";
+
+            var xhr3 = new XMLHttpRequest();
+
+            xhr3.open("GET", URL_reaction2, true);
+            xhr3.send();
+            await sleep(200);
+        }
+        else if (disp == "4") {
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=color2&mode=on";
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=wave&mode=off";
+
+            var xhr2 = new XMLHttpRequest();
+
+            xhr2.open("GET", URL_reaction, true);
+            xhr2.send();
+            await sleep(200);
+            URL_reaction2 = "http://"+location.hostname+"/mode?M=normal";
+
+            var xhr3 = new XMLHttpRequest();
+
+            xhr3.open("GET", URL_reaction2, true);
+            xhr3.send();
+            await sleep(200);
+        }
+        else if (disp == "5") {
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=color2&mode=on";
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", URL_reaction, true);
+            xhr.send();
+            await sleep(200);
+            URL_reaction = "http://"+location.hostname+"/SonOff?service=wave&mode=on";
 
             var xhr2 = new XMLHttpRequest();
 

@@ -10,19 +10,25 @@
 
 #define FORMAT_SPIFFS_IF_FAILED true
 
+#include <FastLED.h>
+#define DATA_PIN 15
+#define NUM_LEDS 56
+CRGB leds[NUM_LEDS];
 
 int arquivo = 0;                                                //Variavel responsavel pela manutenção dos efeitos
 int tempo[3]= {1000, 20, 100};                                   //Matriz de tempo usado nos diferentes modos tempo[0] e tempo[3] se refera ao tempo da função pisca() e tempo[1] a função fade() e modoSom()
-int RGB[3] = {255, 255, 255};                                   //Matriz responsavel por guardar as intensidades das cores
+int RGBB[3] = {255, 255, 255};                                   //Matriz responsavel por guardar as intensidades das cores
 int RGBdisplay[3]= {0,0,0}; 
 int PINO_LED[3] = {22 , 21 , 23};                                 //Pinos digitais PWM conctados nos led
 int canal[3] = {0,1,2};                                         //Matriz responsavel pela manutenção e monitoramente, flag[0] é responsavel por dizer se o led esta ligado ou não flag[1]
 int corSelecionada;
 int contador = 0;
+String comandos[4] = {" ", " ", " ", " "};
 String receiv;
 String garbage;
 void displayColor(String colors);
 void RGBSetUp(String colors);
+void RGBSetUp2(String colors);
 String reg = " ";
 boolean waitB = true;
 //const char* ssid = "Speers-41801";
@@ -36,6 +42,8 @@ void handleRoot() {
 
 void setup(void) {
   Serial.begin(115200);
+   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed
+  
    // Configurando os de controle do led como saida como saida
   pinMode(PINO_LED[0], OUTPUT); // LED vermelho
   pinMode(PINO_LED[1], OUTPUT); // LED verde
@@ -101,6 +109,15 @@ void setup(void) {
       RGBSetUp(comando);
       server.send(200, "text/plain", "R= "+r+" G= "+g+" B= "+b);
     });
+
+     server.on(F("/colorSend2"), []() {
+      comandos[0] = server.arg("C1");
+      comandos[1] = server.arg("C2");
+      comandos[2] = server.arg("C3");
+      comandos[3] = server.arg("C4");
+      RGBSetUp2();
+      server.send(200, "text/plain", "work");
+    });
   
     server.on(F("/mode"), []() {
       String m = server.arg("M");
@@ -138,7 +155,7 @@ void loop(void) {
 int somMode(){
  int colorAnt[] = {0,0,0};
  while(true){
-      int value = RGB[contador];
+      int value = RGBB[contador];
       for(int k = value; k <256; k++){
         server.handleClient();
         if(flag == 1){
@@ -153,21 +170,21 @@ int somMode(){
         colorAnt[0] = RGBdisplay[0];
         colorAnt[1] = RGBdisplay[1];
         colorAnt[2] = RGBdisplay[2];
-        ledcWrite(canal[0], (RGB[0]*4));
-        ledcWrite(canal[1], (RGB[1]*4));
-        ledcWrite(canal[2], (RGB[2]*4));
+        ledcWrite(canal[0], (RGBB[0]*4));
+        ledcWrite(canal[1], (RGBB[1]*4));
+        ledcWrite(canal[2], (RGBB[2]*4));
         if(contador == 0){
-          RGB[0] = k;
-          RGB[2] = (255) - k;
-          RGB[1] = 0;
+          RGBB[0] = k;
+          RGBB[2] = (255) - k;
+          RGBB[1] = 0;
         }else if(contador == 1){
-          RGB[1] = k;
-          RGB[0] = (255) - k;
-          RGB[2] = 0;
+          RGBB[1] = k;
+          RGBB[0] = (255) - k;
+          RGBB[2] = 0;
         }else if(contador == 2){
-          RGB[2] = k;
-          RGB[1] = (255) - k;
-          RGB[0] = 0;
+          RGBB[2] = k;
+          RGBB[1] = (255) - k;
+          RGBB[0] = 0;
         }
         delay(10);
        }
@@ -202,19 +219,69 @@ void RGBSetUp(String colors){
   }
 }
 
+void RGBSetUp2(){
+  for(int i = 0; i < 4; i++){
+    String dataRec = comandos[i];
+    int red = x2i(dataRec.substring(0, 2));
+    int green = x2i(dataRec.substring(2, 4));
+    int blue = x2i(dataRec.substring(4, 6));
+
+    if(i == 0){
+      for(int j = 0; j<4; j++){
+        leds[j] = CRGB(red,green,blue);
+      }
+    }else if(i == 1){
+      for(int j = 10; j<20; j++){
+        leds[j] = CRGB(red,green,blue);
+      }
+    }else if(i == 2){
+      for(int j = 33; j<41; j++){
+        leds[j] = CRGB(red,green,blue);
+      }
+    }else if(i == 3){
+      for(int j = 47; j<51; j++){
+        leds[j] = CRGB(red,green,blue);
+      }
+    }
+    dataRec = " ";
+  }
+   FastLED.show();
+}
+
+int x2i(String s) 
+{
+  int x = 0;
+  int n = s.length();
+  char c[n + 1];
+  strcpy(c, s.c_str());
+  for(int i = 0;i < (n+1);i++) {
+    
+    if (c[i] >= '0' && c[i] <= '9') {
+      x *= 16;
+      x += c[i] - '0'; 
+    }
+    else if (c[i] >= 'a' && c[i] <= 'f') {
+      x *= 16;
+      x += (c[i] - 'a') + 10; 
+    }
+    else break;
+  }
+  return x;
+}
+
 void displayColor(){
 
   for(int j = 0; j <3; j++){
-    if(RGB[j] >= RGBdisplay[j]){
-      for(int i = RGBdisplay[j]; i < RGB[j]; i = i +4){
+    if(RGBB[j] >= RGBdisplay[j]){
+      for(int i = RGBdisplay[j]; i < RGBB[j]; i = i +4){
           ledcWrite(canal[j], i*4 ); // Liga LED  vermelho
-         RGB[j] = RGBdisplay[j];
+         RGBB[j] = RGBdisplay[j];
          delay(50);
       }
     }else{
-      for(int i = RGBdisplay[j]; i > RGB[j]; i = i -4){
+      for(int i = RGBdisplay[j]; i > RGBB[j]; i = i -4){
           ledcWrite(canal[j], i*4 ); // Liga LED vermelho
-         RGB[j] = RGBdisplay[j];
+         RGBB[j] = RGBdisplay[j];
          delay(50);
       }
     }

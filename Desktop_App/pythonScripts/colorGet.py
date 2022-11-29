@@ -30,7 +30,7 @@ class colorGet(Thread):
     def run(self):
         while (self.alive):
                     try:
-                        ipD = '192.168.0.102'
+                        ipD = '192.168.0.162'
                         rT = 0
                         gT = 0
                         bT = 0
@@ -67,6 +67,9 @@ def Start():
     
     ipDisp = request.args.get('ipDisp')
 
+    m = colorGetM(ipDisp)
+    m.start()
+    THREADS.append(m)
     m = colorGet(ipDisp)
     m.start()
     THREADS.append(m)
@@ -92,10 +95,11 @@ def Stop():
 def StartM():
     
     ipDisp = request.args.get('ipDisp')
-
-    m = colorGetM(ipDisp)
-    m.start()
-    THREADS.append(m)
+    for t in THREADS:
+        t.alive = False
+    t = colorGetM(ipDisp)
+    t.start()
+    THREADS.append(t)
     response = "Start"
     return response
 
@@ -116,7 +120,7 @@ class colorGetM(Thread):
 
     def run(self):
         while (self.alive):
-            ipD = "192.168.0.188"
+            ipD = "192.168.0.162"
             time.process_time()
             image = ImageGrab.grab()
             xI, yI = image.size
@@ -129,7 +133,7 @@ class colorGetM(Thread):
             cbxs = 0
             count = 0
             count1 = 0
-            finalString = "colorSend"
+            finalString = "colorSend2"
             for y in range(899, 675, -5):
                 for x in range(0, 360, 5):
                     r,g,b = image.getpixel((x, y))
@@ -282,9 +286,9 @@ class colorGetM(Thread):
 
             req = requests.get('http://'+ ipD +'/'+ finalString)
             req.status_code
-            print(time.process_time())
+            #print(time.process_time())
             print(finalString)
-            print(count1)
+            #print(count1)
 
 
 if __name__ == '__main__':
